@@ -52,8 +52,8 @@ while True:
         # Receive the data in small chunks and retransmit it
         while True:
             msg=rcv_msg(connection)
-            print "the message is:",
-            print msg
+            print("the message is:")
+            print(msg)
             if (msg[0]=='Q'):
                     break
             if RPVERSION:
@@ -63,13 +63,13 @@ while True:
 #                    m[msg[1]:msg[1]+len(msg[2])]=msg[2]
                 elif(msg[0]=='r'):
                     write_msg(connection,0,struct.unpack('<I',m[msg[1]:msg[1]+4])[0])
-                    print "the value is:"+str(struct.unpack('<I',m[msg[1]:msg[1]+4])[0])
+                    print("the value is:"+str(struct.unpack('<I',m[msg[1]:msg[1]+4])[0]))
                 else:
-                    print "not implemented!"
-            print ""
-        print "\n\nclosing"
+                    print("not implemented!")
+            print("")
+        print("\n\nclosing")
     except Exception:
-        print "Socket Closed Abruptly by Peer"
+        print("Socket Closed Abruptly by Peer")
     finally:
         # Clean up the connection
         connection.close()

@@ -65,7 +65,7 @@ def getparmval(strIn,parmname,defaultval):
         outval=strlist[0]
     else:
         outval=defaultval
-    print parmname+": "+outval
+    print(parmname+": "+outval)
     return outval
 def getparmval_int(strIn,parmname,defaultval):
     strlist=re.findall(parmname+"=([\w\a\.-]*)",strIn)
@@ -73,7 +73,7 @@ def getparmval_int(strIn,parmname,defaultval):
         outval=int(strlist[0])
     else:
         outval=int(defaultval)
-    print parmname+": "+str(outval)
+    print(parmname+": "+str(outval))
     return outval
 
 ##########################################################################################################!!!!!
@@ -120,10 +120,10 @@ def SecToCycles ( t_sec ): #take a time in seconds and convert it to RP timestep
 
 def sendsequence (IFfreqA_hz,IFfreqB_hz, timesA_sec, freqsA_hz, timesB_sec,freqsB_hz): #convert freqs and times to FTW/dFTWs, and cycles, and send to RP!
     if (len(timesA_sec)>maxevents):
-        print bcolors.FAIL + "TOO MANY EDGES ON CHANNEL A-- EXCEEDS RED PITAYA RAM SPACE OF " + str(maxevents) + bcolors.ENDC
+        print(bcolors.FAIL + "TOO MANY EDGES ON CHANNEL A-- EXCEEDS RED PITAYA RAM SPACE OF " + str(maxevents) + bcolors.ENDC)
         exit()
     if (len(timesB_sec)>maxevents):
-        print bcolors.FAIL + "TOO MANY EDGES ON CHANNEL B-- EXCEEDS RED PITAYA RAM SPACE OF " + str(maxevents) + bcolors.ENDC
+        print(bcolors.FAIL + "TOO MANY EDGES ON CHANNEL B-- EXCEEDS RED PITAYA RAM SPACE OF " + str(maxevents) + bcolors.ENDC)
         exit()    
 
     #compute Freqs in Hz to FTWs
@@ -163,14 +163,14 @@ def sendsequence (IFfreqA_hz,IFfreqB_hz, timesA_sec, freqsA_hz, timesB_sec,freqs
     #================================================#
     #================================================#
 
-    print dtA_cyc
-    print dfA_FTW
+    print(dtA_cyc)
+    print(dfA_FTW)
     
     if(DEBUGMODE==False):
-        print "Length of dtA_cyc: " + str(len(dtA_cyc))
-        print "Length of dBA_cyc: " + str(len(dtB_cyc))
-        print "Length of dfA_FTW: " + str(len(dfA_FTW))
-        print "Length of dfB_FTW: " + str(len(dfB_FTW))
+        print( "Length of dtA_cyc: " + str(len(dtA_cyc)))
+        print( "Length of dBA_cyc: " + str(len(dtB_cyc)))
+        print( "Length of dfA_FTW: " + str(len(dfA_FTW)))
+        print( "Length of dfB_FTW: " + str(len(dfB_FTW)))
         
         #send the number of samples on each channel
         JSocket.write_msg(sock,DDSsamplesA_OFFSET,len(timesA_sec))
@@ -188,7 +188,7 @@ def sendsequence (IFfreqA_hz,IFfreqB_hz, timesA_sec, freqsA_hz, timesB_sec,freqs
         JSocket.write_msg(sock,DDSftw_IF_A_OFFSET, int(IF_A_FTW)) #these must be sent as unsigned 32 bit numbers
         JSocket.write_msg(sock,DDSftw_IF_B_OFFSET, int(IF_B_FTW)) #these must be sent as unsigned 32 bit numbers
     
-        print "IF A FTW:" + str(int(IF_A_FTW))
+        print("IF A FTW:" + str(int(IF_A_FTW)))
         
         #reset the RP FSM and prepare it for a trigger!
         JSocket.write_msg(sock,DDSawaittrigger_OFFSET,0) #value sent doesn't affect anything

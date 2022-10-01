@@ -45,7 +45,7 @@ def recv_len(s,l): #receive data of length l from socket s
     while(lremaining>0):
         newdat=s.recv(lremaining)
         if newdat=="":
-            print "disconnected!"
+            print("disconnected!")
             raise Exception('Socket Closed!')
         data+=newdat
         lremaining=l-len(data)
@@ -58,9 +58,9 @@ def rcv_msg( s ):
     listlenLEN=4 #four bytes to describe length of list (in bytes) to follow!
     datatype=recv_len(s,1)[0]
     dataADDR,=struct.unpack('<I',recv_len(s,addrLEN))
-    print "dataADDR is: 0x" + int2base(dataADDR,16)
+    print("dataADDR is: 0x" + int2base(dataADDR,16))
     dataADDR-= RP_BASEADDRESS
-    print "datatype is: " + str(datatype)
+    print("datatype is: " + str(datatype))
     if (datatype=='w'): #write (one address, and then one value)
         dataVAL=recv_len(s,valLEN)
         return ['w',dataADDR,dataVAL]
@@ -76,4 +76,4 @@ def rcv_msg( s ):
     elif (datatype=='Q'):
         return ['Q']
     else:
-        print "FAIL"
+        print("FAIL")

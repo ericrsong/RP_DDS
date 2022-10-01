@@ -12,7 +12,7 @@ def getparmval(strIn,parmname,defaultval):
         outval=strlist[0]
     else:
         outval=defaultval
-    print parmname+": "+outval
+    print(parmname+": "+outval)
     return outval
 
 
